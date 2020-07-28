@@ -1,16 +1,27 @@
 <template>
   <div id="app">
     <Header />
+    <ul>
+      <li v-for="(value, curr) in allCurrency.rates" :key="curr">{{curr}}{{value}}</li>
+    </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import Header from './components/Header.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
+  },
+  methods: mapActions(['fetchCurrency']),
+  async created() {
+    this.fetchCurrency('USD');
+  },
+  computed: {
+    ...mapGetters(['allCurrency', 'allMenuCurrency']),
   },
 };
 </script>

@@ -12,7 +12,7 @@
         <a @click="chooseCurrency(curr)"
           class="tabs-item"
           :class="{active: curr === currentCurr}"
-          v-for="curr in currencyMenu"
+          v-for="curr in currentMenu"
           :key="curr"
           >{{ curr }}</a>
         <a @click="getNextMenuItem()"
@@ -27,42 +27,33 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'Header',
   data() {
     return {
-      currency: [
-        'USD',
-        'EUR',
-        'RUB',
-        'HRK',
-        'NOK',
-        'CAD',
-        'JPY',
-        'THB',
-        'CHF',
-        'MYR',
-        'BGN',
-        'ZAR',
-        'AUD',
-        'PLN',
-      ],
-      currencyMenu: [],
       currentCurr: 'USD',
       start: 0,
       isNextBtnVisible: true,
       isPrevBtnVisible: false,
     };
   },
-  mounted() {
-    this.getCurrentMenu(this.start, this.start + 7);
+  computed: {
+    ...mapGetters(['allMenuCurrency']),
+    currentMenu() {
+      return this.getCurrentMenu(this.start, this.start + 7);
+    },
   },
   methods: {
-    chooseCurrency(curr) {
-      this.currentCurr = curr;
-    },
+    ...mapActions(['fetchCurrency']),
     getCurrentMenu(start, end) {
-      this.currencyMenu = this.currency.filter((name, index) => index >= start && index < end);
+      return this.allMenuCurrency
+        .filter((name, index) => index >= start && index < end);
+    },
+    async chooseCurrency(curr) {
+      this.fetchCurrency(curr);
+      this.currentCurr = curr;
     },
     getNextMenuItem() {
       this.start += 1;
@@ -75,7 +66,7 @@ export default {
       this.getBtnsVisibility();
     },
     getBtnsVisibility() {
-      this.isNextBtnVisible = (this.currency.length !== this.start + 7);
+      this.isNextBtnVisible = (this.allMenuCurrency.length !== this.start + 7);
       this.isPrevBtnVisible = (this.start !== 0);
     },
   },
