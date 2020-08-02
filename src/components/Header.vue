@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="content">
-      <p class="title">Курс {{ currentCurr }} сегодня</p>
+      <p class="title">Курс {{ baseCurrency }} сегодня</p>
       <nav class="tabs-items">
         <a @click="getPrevMenuItem()"
           class="tabs-item arrow"
@@ -11,7 +11,7 @@
         </a>
         <a @click="chooseCurrency(curr)"
           class="tabs-item"
-          :class="{active: curr === currentCurr}"
+          :class="{active: curr === baseCurrency}"
           v-for="curr in currentMenu"
           :key="curr"
           >{{ curr }}</a>
@@ -33,17 +33,20 @@ export default {
   name: 'Header',
   data() {
     return {
-      currentCurr: 'USD',
+      currentCurrency: 'CAD',
       start: 0,
       isNextBtnVisible: true,
       isPrevBtnVisible: false,
     };
   },
   computed: {
-    ...mapGetters(['allMenuCurrency']),
+    ...mapGetters(['allMenuCurrency', 'baseCurrency']),
     currentMenu() {
       return this.getCurrentMenu(this.start, this.start + 7);
     },
+  },
+  async created() {
+    this.fetchCurrency(this.currentCurrency);
   },
   methods: {
     ...mapActions(['fetchCurrency']),
@@ -76,9 +79,6 @@ export default {
 <style scoped>
   .header {
     background-color: #FFE782;
-    width: 720px;
-    height: 110px;
-    margin: 0px auto;
   }
 
   .content {
