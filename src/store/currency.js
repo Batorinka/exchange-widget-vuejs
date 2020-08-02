@@ -1,6 +1,6 @@
 export default {
   actions: {
-    async fetchCurrency(ctx, baseCurrency = 'USD') {
+    async fetchCurrency(ctx, baseCurrency = 'CAD') {
       const res = await fetch(
         `https://api.exchangeratesapi.io/latest?base=${baseCurrency}`,
       );
@@ -10,13 +10,15 @@ export default {
   },
   mutations: {
     updateCurrency(state, currency) {
-      state.currency = currency;
+      state.currency = Object.entries(currency.rates);
       state.allMenuCurrency = Object.keys(currency.rates);
+      state.baseCurrency = currency.base;
     },
   },
   state: {
     currency: [],
     allMenuCurrency: [],
+    baseCurrency: String,
   },
   getters: {
     allCurrency(state) {
@@ -24,6 +26,9 @@ export default {
     },
     allMenuCurrency(state) {
       return state.allMenuCurrency;
+    },
+    baseCurrency(state) {
+      return state.baseCurrency;
     },
   },
 };
