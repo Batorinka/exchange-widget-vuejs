@@ -43,7 +43,6 @@ export default {
     left: 9.17%;
     right: 65.14%;
     top: calc(50% - 28px/2 - 37px);
-
     font-style: normal;
     font-weight: 300;
     font-size: 28px;
@@ -62,13 +61,11 @@ export default {
     left: 9.17%;
     right: 31.19%;
     top: calc(50% - 56px/2 + 24px);
-
     font-style: normal;
     font-weight: 300;
     font-size: 56px;
     line-height: 56px;
     letter-spacing: 0.0342857px;
-
     color: #2B2D33;
   }
   .curr {
