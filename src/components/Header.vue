@@ -7,7 +7,7 @@
           class="tabs-item arrow"
           v-show="isPrevBtnVisible"
           >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
+          <ChevronLeft />
         </a>
         <a @click="chooseCurrency(curr)"
           class="tabs-item"
@@ -19,7 +19,7 @@
           class="tabs-item arrow"
           v-show="isNextBtnVisible"
           >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z"/></svg>
+          <ChevronRight />
         </a>
       </nav>
     </div>
@@ -28,9 +28,15 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import ChevronRight from './ChevronRight.vue';
+import ChevronLeft from './ChevronLeft.vue';
 
 export default {
   name: 'Header',
+  components: {
+    ChevronRight,
+    ChevronLeft,
+  },
   data() {
     return {
       currentCurrency: 'CAD',
