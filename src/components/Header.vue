@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      currentCurrency: 'CAD',
+      currentCurrency: 'RUB',
       start: 0,
       isNextBtnVisible: true,
       isPrevBtnVisible: false,

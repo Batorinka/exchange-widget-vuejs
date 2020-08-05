@@ -95,8 +95,9 @@ export default {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 720px;
-  height: 582px;
+  max-width: 720px;
+  max-height: 582px;
+  min-height: 582px;
   display:flex;
   flex-direction:column;
   margin: 0px auto;
@@ -104,6 +105,17 @@ export default {
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+@media (max-width: 720px) {
+  #app {
+    max-width: 320px;
+    min-width: 320px;
+    max-height: 1000px;
+    min-height: 100px;
+
+  }
+}
+
 html,
 body {
   height: 100%;

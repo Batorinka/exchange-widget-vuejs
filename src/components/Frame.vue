@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="frame">
     <div class="base">
       <span class="quantity">{{ quantity }}</span>
       {{ baseCurrencyName }} =
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style scoped>
-  .row {
+  .frame {
     position: relative;
     width: 297px;
     height: 108px;
@@ -33,7 +33,12 @@ export default {
     box-shadow: 0px 3px 6px rgba(157, 157, 157, 0.16);
     border-radius: 12px;
   }
-  .row:hover {
+  @media(max-width: 720) {
+    .frame {
+      width: 274px;
+    }
+  }
+  .frame:hover {
     box-shadow: 0px 6px 6px rgba(157, 157, 157, 0.6);
   }
   .base {
@@ -58,6 +63,7 @@ export default {
     white-space: nowrap;
     position: absolute;
     height: 56px;
+    width: 80%;
     left: 9.17%;
     right: 31.19%;
     top: calc(50% - 56px/2 + 24px);
@@ -67,6 +73,12 @@ export default {
     line-height: 56px;
     letter-spacing: 0.0342857px;
     color: #2B2D33;
+    overflow: hidden;
+  }
+  @media(max-width: 720) {
+    .value {
+      font-size: 26px;
+    }
   }
   .curr {
     font-size: 24px;
